@@ -1,0 +1,40 @@
+<div class="tablenav bottom">
+  <div class="alignleft actions bulkactions">
+    <ng-container *ngIf="isActived() else deleted" >
+      <select name="bulk_actions">
+        <option value="">Acciones en lote</option>
+        <option value="trash">Mover a la papelera</option>
+      </select>
+    </ng-container>
+
+    <input type="submit" class="button action">
+  </div>
+  <div class="tablenav-pages">
+    <span class="displaying-num">3 elementos</span>
+    <span class="pagination-links">
+      <span aria-hidden="true" class="tablenav-pages-navspan">«</span>&nbsp;
+      <span aria-hidden="true" class="tablenav-pages-navspan">‹</span>&nbsp;
+      <span class="paging-input">
+        <label class="screen-reader-text" for="current-page-selector">Página Actual</label>
+        <input type="text" aria-describedby="table-paging" size="2" name="paged" id="current-page-selector" class="current-page" value="1">de&nbsp;
+        <span class="total-pages">2</span>
+      </span>&nbsp;
+      <a href="javascript:;" class="next-page">
+        <span class="screen-reader-text">Siguiente página</span>
+        <span aria-hidden="true">›</span>
+      </a>&nbsp;
+      <span aria-hidden="true" class="tablenav-pages-navspan">»</span>
+    </span>
+  </div>
+</div>
+
+
+
+
+<ng-template #deleted>
+    <select name="bulk_actions">
+      <option value="">Acciones en lote</option>
+      <option value="restore">Restablecer</option>
+      <option value="delete">Borrar permanentemente</option>
+    </select>
+</ng-template>

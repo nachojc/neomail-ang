@@ -1,0 +1,12 @@
+<div class="input-form">
+  <input type="text" id="name" [class.filled]="dto.name.length" [(ngModel)]="dto.name">
+  <span><label for="name"> Nombre:</label></span>
+</div>
+<div class="input-form">
+  <input type="text" id="description" [class.filled]="dto.description.length" [(ngModel)]="dto.description">
+  <span><label for="description"> Descripcion:</label></span>
+</div>
+<p class="bottom">
+  <button class="button" (click)= "sendValues()" [disabled]="!isValid()">Enviar</button>
+  <button class="button button-primary" (click)= "closeModal()" >Cancelar</button>
+</p>

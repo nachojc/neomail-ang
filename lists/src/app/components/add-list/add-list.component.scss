@@ -1,0 +1,14 @@
+:host(){
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    p{
+        text-align: center;
+        button{
+            margin-right: 8px;
+        }
+        button:last-of-type{
+            margin-right: 0;
+        }
+    }
+}
