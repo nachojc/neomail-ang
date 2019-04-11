@@ -12,13 +12,6 @@ export class TableComponent {
     set data( data: any ) {
       this.dto = data;
     }
-  dto = {header: [],  data: [{}]};
-
-
-  headers = [];
-  list = [];
-
-  constructor() { }
-
+  dto = {header: [],  data: [{}], page: 1, total: 0};
 
 }

@@ -7,6 +7,6 @@ export const ListStatusEnum = [
   ];
 
 export enum Status {
-  'Actived' = 'actived',
-  'Deleted' = 'deleted'
+  'Actives' = 1,
+  'Deleted' = 0
 }

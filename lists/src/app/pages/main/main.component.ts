@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 import { ModalComponent } from 'libs/neo-lib/src/components/modal/modal.component';
 import { Size } from 'libs/neo-lib/src/components/modal/size.enum';
 import { Status } from 'src/app/enums/status';
-import { Columns } from './colums.const';
+import { Columns } from '../../enums/colums';
 
 
 @Component({
@@ -13,17 +13,15 @@ import { Columns } from './colums.const';
   styleUrls: ['./main.component.scss']
 })
 export class MainComponent implements OnInit, OnDestroy {
-  @ViewChild( ModalComponent ) modal: ModalComponent;
-  modalTitle = '';
-  actived = 0;
-  deleted = 0;
-  action: Status = Status.Actived ;
-  private page = 1;
+  action: Status = Status.Actives ;
   private list$: Subscription;
 
+  @ViewChild( ModalComponent ) modal: ModalComponent;
+  modalTitle = '';
   dto = {
+    nav: {actived : 0, deleted : 0},
     header: Columns,
-    data: [{}]
+    data: []
   };
 
   constructor(private lists: ListsService) { }
@@ -31,23 +29,19 @@ export class MainComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.list$ = this.lists.getLists().subscribe(dta => {
       this.dto.data = dta;
-      this.actived = this.lists.getTotal();
-      this.deleted = this.lists.getDeleted();
+      this.dto.nav.actived = this.lists.getTotal();
+      this.dto.nav.deleted = this.lists.getDeleted();
     });
   }
   ngOnDestroy(): void {
     this.list$.unsubscribe();
   }
 
-  reLoad(e: any, target: Status) {
+  reLoad(target: Status) {
     if (this.action !== target) {
       this.action = target;
       this.dto.data = null;
-      if (target === Status.Actived) {
-        this.lists.reload(this.page, false);
-      } else {
-        this.lists.reload(this.page, true);
-      }
+      this.lists.reload(1, target);
     }
     return false;
   }
@@ -58,4 +52,9 @@ export class MainComponent implements OnInit, OnDestroy {
   closeModal() {
     this.modal.close();
   }
+  onChange(val: string) {
+    // console.log(val);
+  }
+
+  isActives() { return this.action === Status.Actives; }
 }

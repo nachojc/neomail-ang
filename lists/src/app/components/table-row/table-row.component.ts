@@ -14,4 +14,5 @@ export class TableRowComponent  {
   viewSubscriptors() {}
   removeItem() {}
 
+  isActives() { return this.status === Status.Actives; }
 }

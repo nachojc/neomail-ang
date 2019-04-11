@@ -2,13 +2,13 @@
     <h2>Listas <a class="page-title-action"  (click)="addList()">Añadir lista</a></h2>
 </div>
 <ul class="subsubsub">
-    <li><a href="#" [class.current]="action == 'actived'" (click)="reLoad($event,'actived')">Activas&nbsp;<span class="count">({{actived}})</span></a></li>
-    <li> |<a href="#" [class.current]="action == 'deleted'" (click)="reLoad($event,'deleted')">Papelera&nbsp;<span class="count">({{deleted}})</span></a></li>
+    <li><a href="#" [class.current]="isActives()" (click)="reLoad(1)">Activas&nbsp;<span class="count">({{dto.nav.actived}})</span></a></li>
+    <li> |<a href="#" [class.current]="!isActives()" (click)="reLoad(0)">Papelera&nbsp;<span class="count">({{dto.nav.deleted}})</span></a></li>
 </ul>
 
-<neo-table-nav [action]="action"></neo-table-nav>
+<neo-table-nav [action]="action" (change)="onChange($event)"></neo-table-nav>
 <neo-table [data]="dto" [action]="action"></neo-table>
-<neo-table-nav [action]="action"></neo-table-nav>
+<neo-table-nav [action]="action" (change)="onChange($event)"></neo-table-nav>
 
 <neo-modal>
     <div header *ngIf="modalTitle">{{modalTitle}}</div>
