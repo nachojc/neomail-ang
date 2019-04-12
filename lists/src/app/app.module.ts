@@ -16,9 +16,7 @@ import { TableRowComponent } from './components/table-row/table-row.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ModalComponent } from 'libs/neo-lib/src/components/modal/modal.component';
 import { TableHeaderComponent } from './components/table-header/table-header/table-header.component';
-import { TableNavComponent } from './components/table-nav/table-nav/table-nav.component';
-
-
+import { TableNavComponent } from './components/table-nav/table-nav.component';
 
 @NgModule({
   declarations: [
