@@ -1,13 +1,13 @@
 :host{
     .input-form{
         border-top: .84375em solid transparent;
-        padding: .4375em 0;
+        // padding: .4375em 0;
         display: block;
         position: relative;
         flex: auto;
-        min-width: 0;
-        width: 100%;
-        margin: .6em 0;
+        // min-width: 0;
+        // width: 100%;
+        margin: 0 0.6em .6em 0;
         font-size: inherit;
         font-weight: 400;
         line-height: 1.125;
@@ -20,9 +20,10 @@
             padding: 0 8px;
             margin: 0;
             width: 100%;
-            max-width: 100%;
             vertical-align: bottom;
             text-align: inherit;
+            height: 36px;
+            box-shadow: none;
         }
         span{
             position: absolute;
@@ -38,13 +39,13 @@
         label{
             position: absolute;
             font-size: 14px;
-            margin-top: 0;
+            margin-top: 10px;
             text-transform: uppercase;
             transition: font-size 1s ease-out, margin-top .5s ease-out, text-transform .5s ease-out;
         }
         input:focus + span label, input.filled + span label{
             font-size: 12px;
-            margin-top: -18px;
+            margin-top: -10px;
             text-transform: none;
             // -webkit-transition:;
             transition: font-size 1s ease-out, margin-top .5s ease-out;

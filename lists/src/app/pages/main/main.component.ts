@@ -14,6 +14,7 @@ import { Columns } from '../../enums/colums';
 })
 export class MainComponent implements OnInit, OnDestroy {
   action: Status = Status.Actives ;
+  modalAdd = true;
   private list$: Subscription;
 
   @ViewChild( ModalComponent ) modal: ModalComponent;
@@ -31,6 +32,7 @@ export class MainComponent implements OnInit, OnDestroy {
       this.dto.data = dta;
       this.dto.nav.actived = this.lists.getTotal();
       this.dto.nav.deleted = this.lists.getDeleted();
+      this.action = this.lists.getStatus();
     });
   }
   ngOnDestroy(): void {
@@ -46,6 +48,7 @@ export class MainComponent implements OnInit, OnDestroy {
     return false;
   }
   addList() {
+    this.modalAdd = true;
     this.modalTitle = 'Nueva lista';
     this.modal.open(Size.Small);
   }

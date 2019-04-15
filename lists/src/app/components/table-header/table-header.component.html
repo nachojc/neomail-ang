@@ -7,7 +7,7 @@
     <ng-template #header>
       <ng-container *ngIf="item.sort else description">
         <th role="columnheader" class="manage-column column-primary sortable desc {{item.type}}" scope="col">
-          <a role="button" tabindex="0">
+          <a role="button" tabindex="0" (click)="sortElement(item.field)">
             <span>{{item.name}}</span>
             <span class="sorting-indicator"></span>
           </a>

@@ -4,7 +4,7 @@
   </thead>
   <tbody>
         <ng-container *ngIf="dto.data?.length else loading" >
-            <neo-table-row *ngFor="let item of dto.data" [data]="item"></neo-table-row>
+            <neo-table-row *ngFor="let item of dto.data" [data]="item" [status]="action"></neo-table-row>
         </ng-container>
   </tbody>
   <tfoot>

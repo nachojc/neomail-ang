@@ -9,7 +9,6 @@
     <input type="submit" class="button action">
   </div>
   <div class="tablenav-pages">
-    <span class="displaying-num">3 elementos</span>
     <span class="pagination-links">
       <a href="#" class="next-page" (click)="onFirt()" *ngIf="page.page>1">
         <span class="screen-reader-text">Primera página</span>
@@ -46,8 +45,8 @@
 
 <ng-template #deleted>
     <select name="bulk_actions">
-      <option value="">Acciones en lote</option>
-      <option value="restore">Restablecer</option>
+        <option value="">Seleccione accion a realizar</option>
+        <option value="restore">Restablecer</option>
       <option value="delete">Borrar permanentemente</option>
     </select>
 </ng-template>

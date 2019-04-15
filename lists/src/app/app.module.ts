@@ -15,14 +15,16 @@ import { TableComponent } from './components/table/table.component';
 import { TableRowComponent } from './components/table-row/table-row.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ModalComponent } from 'libs/neo-lib/src/components/modal/modal.component';
-import { TableHeaderComponent } from './components/table-header/table-header/table-header.component';
+import { TableHeaderComponent } from './components/table-header/table-header.component';
 import { TableNavComponent } from './components/table-nav/table-nav.component';
+import { EditListComponent } from './components/edit-list/edit-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent,
     AddListComponent,
+    EditListComponent,
     TableComponent,
     TableRowComponent,
     ModalComponent,

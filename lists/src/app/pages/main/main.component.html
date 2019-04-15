@@ -12,5 +12,6 @@
 
 <neo-modal>
     <div header *ngIf="modalTitle">{{modalTitle}}</div>
-    <neo-add-list (close)="closeModal()"></neo-add-list>
+    <neo-add-list *ngIf="modalAdd" (close)="closeModal()"></neo-add-list>
+    <neo-edit-list *ngIf="!modalAdd" (close)="closeModal()"></neo-edit-list>
 </neo-modal>

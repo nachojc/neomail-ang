@@ -1,8 +1,10 @@
+import { FieldOption } from "../services/lists/lists.model";
+
 export const Columns = [
     {name: 'Selector', sort: false, type: 'radio'},
-    {name: 'Nombre', sort: true, type: 'big'},
-    {name: 'Descripción', sort: false, type: ''},
+    {name: 'Nombre', sort: true, field: FieldOption.name, type: 'big'},
+    {name: 'Descripción', sort: false, field: FieldOption.decription, type: ''},
     {name: 'Suscritos', sort: false, type: ''},
     {name: 'No confirmados', sort: false, type: ''},
-    {name: 'Craedo ...', sort: true, type: ''},
+    {name: 'Craedo ...', sort: true, field: FieldOption.createAt, type: ''}
   ];

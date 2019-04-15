@@ -1,3 +1,5 @@
+import { Status } from '../enums/status';
+
 export interface ItemDataList {
     id: number;
     name: string;
@@ -5,6 +7,7 @@ export interface ItemDataList {
     status: number;
     total: number;
     date: string;
+    last: string;
 }
 export interface DataList {
     active: number;
@@ -20,4 +23,5 @@ export interface NavPagesParams {
     pages: number;
     step: number;
     total: number;
+    status: Status;
 }

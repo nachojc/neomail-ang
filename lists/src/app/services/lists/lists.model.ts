@@ -1,14 +1,16 @@
-export interface Lists {
-    active: number;
-    deleted: number;
-    attributes: List[];
+export enum FieldOption {
+    name = 'n' ,
+    decription = 'd',
+    createAt = 'c',
+    updateAt = 'u'
 }
 
+export enum OrderOption {
+    Ascendent = 'a',
+    Descendent = 'd'
+}
 
-export interface List {
-    name: string;
-    description: string;
-    status: number;
-    total: number;
-    date: Date;
+export interface DeleteRequest {
+    r?: '1' | '0';
+    v?: string;
 }
