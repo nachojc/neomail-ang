@@ -7,11 +7,14 @@
 </ul>
 
 <neo-table-nav [action]="action" (change)="onChange($event)"></neo-table-nav>
-<neo-table [data]="dto" [action]="action"></neo-table>
+<neo-table 
+    (edit)="editItem( $event )"
+    (view)="viewItem( $event )"
+    [data]="dto" [action]="action"></neo-table>
 <neo-table-nav [action]="action" (change)="onChange($event)"></neo-table-nav>
 
 <neo-modal>
     <div header *ngIf="modalTitle">{{modalTitle}}</div>
     <neo-add-list *ngIf="modalAdd" (close)="closeModal()"></neo-add-list>
-    <neo-edit-list *ngIf="!modalAdd" (close)="closeModal()"></neo-edit-list>
+    <neo-edit-list *ngIf="!modalAdd" (close)="closeModal()" [value]="getEditValue()"></neo-edit-list>
 </neo-modal>

@@ -6,5 +6,5 @@ export const Columns = [
     {name: 'Descripción', sort: false, field: FieldOption.decription, type: ''},
     {name: 'Suscritos', sort: false, type: ''},
     {name: 'No confirmados', sort: false, type: ''},
-    {name: 'Craedo ...', sort: true, field: FieldOption.createAt, type: ''}
+    {name: 'Creado ...', sort: true, field: FieldOption.createAt, type: ''}
   ];

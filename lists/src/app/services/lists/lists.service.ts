@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject, Subject } from 'rxjs';
 import { Status } from 'src/app/enums/status';
-import { DataList, NavPagesParams } from 'src/app/models/list.model';
+import { DataList, NavPagesParams, ItemDataList } from 'src/app/models/list.model';
 import { FieldOption, OrderOption, DeleteRequest } from './lists.model';
 
 
 
-const URL = '/wp-json/neomail/v1/list';
+const URL = 'http://localhost:3200/wp-json/neomail/v1/list';
 // const URL = '/wp-json/neomail/v1/list';
 @Injectable({
   providedIn: 'root'
@@ -15,6 +15,7 @@ const URL = '/wp-json/neomail/v1/list';
 export class ListsService {
   private _lists: DataList = {active: 0, deleted: 0, step: 1, attributes: []};
   private _lists$ = new BehaviorSubject<any>(this._lists.attributes);
+  private _item$ = new Subject<any>();
   private _nav$ = new BehaviorSubject<NavPagesParams>(this._getNavParams());
   private _page = 0;
   private _order = OrderOption.Ascendent;
@@ -69,6 +70,11 @@ export class ListsService {
       result.next(id);
     }, e => {console.log(e);});
     return result.asObservable();
+  }
+  updateItem(obj: ItemDataList): Observable<number> {
+    // TODO
+
+    return this._item$.asObservable();
   }
   shortBy(field: FieldOption) {
     if (this._field === field) {

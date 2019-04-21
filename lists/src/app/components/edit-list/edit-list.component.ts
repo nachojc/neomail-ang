@@ -1,8 +1,8 @@
-import { Component, SecurityContext, Output, EventEmitter } from '@angular/core';
+import { Component, SecurityContext, Output, EventEmitter, Input } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ListsService } from 'src/app/services/lists/lists.service';
 import { first} from 'rxjs/operators';
-
+import { ItemDataList } from 'src/app/models/list.model';
 
 @Component({
   selector: 'neo-edit-list',
@@ -14,7 +14,12 @@ import { first} from 'rxjs/operators';
 })
 export class EditListComponent {
   @Output() close = new EventEmitter();
-  dto = {name: '', description: ''};
+  @Input() set value(val) {
+    if (val.hasOwnProperty('name') && val.hasOwnProperty('description')){
+      this.dto = val;
+    }
+  }
+  dto: ItemDataList;
   constructor(private sanitizer: DomSanitizer, private lists: ListsService) { }
 
   sendValues() {
@@ -22,10 +27,10 @@ export class EditListComponent {
     this.dto.description = this.sanitizer.sanitize(SecurityContext.HTML, this.dto.description);
 
     if ( this.isValid()) {
-      this.lists.addList(this.dto)
+      this.lists.updateItem(this.dto)
         .pipe(first())
         .subscribe(id => {
-          this.close.emit( id );
+          this.close.emit( this.dto.id );
         });
     }
   }

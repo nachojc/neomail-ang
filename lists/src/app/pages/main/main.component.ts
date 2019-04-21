@@ -5,6 +5,7 @@ import { ModalComponent } from 'libs/neo-lib/src/components/modal/modal.componen
 import { Size } from 'libs/neo-lib/src/components/modal/size.enum';
 import { Status } from 'src/app/enums/status';
 import { Columns } from '../../enums/colums';
+import { DataList, ItemDataList } from 'src/app/models/list.model';
 
 
 @Component({
@@ -16,6 +17,7 @@ export class MainComponent implements OnInit, OnDestroy {
   action: Status = Status.Actives ;
   modalAdd = true;
   private list$: Subscription;
+  private _editValue: ItemDataList;
 
   @ViewChild( ModalComponent ) modal: ModalComponent;
   modalTitle = '';
@@ -58,6 +60,17 @@ export class MainComponent implements OnInit, OnDestroy {
   onChange(val: string) {
     // console.log(val);
   }
+
+  editItem(id) {
+    this._editValue =  this.dto.data.filter(obj => obj.id === id)[0];
+    this.modalAdd = false;
+    this.modalTitle = 'Editar lista';
+    this.modal.open(Size.Small);
+  }
+  getEditValue() {
+    return this._editValue;
+  }
+  viewItem(id) { console.log(id);  }
 
   isActives() { return this.action === Status.Actives; }
 }
