@@ -10,32 +10,32 @@
   </div>
   <div class="tablenav-pages">
     <span class="pagination-links">
-      <a href="#" class="next-page" (click)="onFirt()" *ngIf="page.page>1">
+      <a href="#" class="next-page button" (click)="onFirt()" *ngIf="page.page>1">
         <span class="screen-reader-text">Primera página</span>
         <span aria-hidden="true">«</span>
       </a>
-      <span aria-hidden="true" class="tablenav-pages-navspan" *ngIf="page.page===1">«</span>&nbsp;
-      <a href="#" class="next-page" (click)="onPrevious()" *ngIf="page.page>1">
+      <span aria-hidden="true" class="tablenav-pages-navspan button disabled" *ngIf="page.page===1">«</span>&nbsp;
+      <a href="#" class="next-page button" (click)="onPrevious()" *ngIf="page.page>1">
         <span class="screen-reader-text">Página previa</span>
         <span aria-hidden="true">‹</span>
       </a>
-      <span aria-hidden="true" class="tablenav-pages-navspan" *ngIf="page.page===1">‹</span>&nbsp;
+      <span aria-hidden="true" class="tablenav-pages-navspan button disabled" *ngIf="page.page===1">‹</span>&nbsp;
       <span class="paging-input">
         <label class="screen-reader-text" for="current-page-selector">Página Actual</label>
         <input type="text" aria-describedby="table-paging" size="2" name="paged" id="current-page-selector" class="current-page" (change)="onGoto($event)" [value]="page.page">de&nbsp;
         <span class="total-pages">{{page.pages}}</span>
       </span>&nbsp;
-      <a href="#" class="next-page" (click)="onNext()" *ngIf="page.page<page.pages">
+      <a href="#" class="next-page button" (click)="onNext()" *ngIf="page.page<page.pages">
         <span class="screen-reader-text">Siguiente página</span>
         <span aria-hidden="true">›</span>
       </a>
-      <span aria-hidden="true" class="tablenav-pages-navspan" *ngIf="page.page===page.pages">›</span>
+      <span aria-hidden="true" class="tablenav-pages-navspan button disabled" *ngIf="page.page===page.pages">›</span>
       &nbsp;
-      <a href="#" class="next-page" (click)="onLast()" *ngIf="page.page<page.pages">
+      <a href="#" class="next-page button" (click)="onLast()" *ngIf="page.page<page.pages">
         <span class="screen-reader-text">Ultima página</span>
         <span aria-hidden="true">»</span>
       </a>
-      <span aria-hidden="true" class="tablenav-pages-navspan" *ngIf="page.page===page.pages">»</span>
+      <span aria-hidden="true" class="tablenav-pages-navspan button disabled" *ngIf="page.page===page.pages">»</span>
     </span>
   </div>
 </div>
