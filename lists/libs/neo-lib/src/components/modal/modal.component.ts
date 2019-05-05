@@ -34,11 +34,15 @@ let index = 1;
 })
 export class ModalComponent {
   @Input() modalId = 'modal-dialog' + index++;
-  @Output() closed = new  EventEmitter();
+  @Output() closed = new  EventEmitter<boolean>();
 
   opened = false;
   private size: Size = Size.Medium;
-  constructor(private elem: ElementRef, private render: Renderer2) { }
+
+  constructor(
+    private elem: ElementRef,
+    private render: Renderer2
+  ) {}
 
   open(size?: Size): void {
     this.render.addClass(this.elem.nativeElement, size || this.size);

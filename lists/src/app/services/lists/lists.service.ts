@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, BehaviorSubject, Subject } from 'rxjs';
+import { Observable, BehaviorSubject, Subject, pipe } from 'rxjs';
 import { Status } from 'src/app/enums/status';
 import { DataList, NavPagesParams, ItemDataList } from 'src/app/models/list.model';
 import { FieldOption, OrderOption, DeleteRequest } from './lists.model';
+import { first } from 'rxjs/operators';
 
 
 
@@ -71,8 +72,16 @@ export class ListsService {
     }, e => {console.log(e);});
     return result.asObservable();
   }
-  updateItem(obj: ItemDataList): Observable<number> {
-    // TODO
+  updateItem(data: ItemDataList): Observable<number> {
+    this.http.put(URL + '/upt/' + data.id + '?v=' + data.last, data)
+      .pipe(first())
+      .subscribe( (dto: ItemDataList) => {
+        if (!!dto) {
+          this._lists.attributes.filter(el => el.id = data.id)[0] = dto;
+          this._lists$.next(this._lists.attributes);
+          this._item$.next(data.id);
+        }
+      });
 
     return this._item$.asObservable();
   }
