@@ -10,9 +10,9 @@ import { AppComponent } from './app.component';
 import { MainComponent } from './pages/main/main.component';
 import { AddUserComponent } from './pages/add-user/add-user.component';
 import { TableComponent } from './components/table/table.component';
-import { TableRowComponent } from './components/table-row/table-row.component';
 import { SearchComponent } from './components/search/search.component';
 import { HttpClientModule } from '@angular/common/http';
+import { TableModule } from './components/table/table.module';
 
 
 @NgModule({
@@ -20,15 +20,15 @@ import { HttpClientModule } from '@angular/common/http';
     AppComponent,
     MainComponent,
     AddUserComponent,
-    TableComponent,
-    TableRowComponent,
+
     SearchComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    TableModule
   ],
   bootstrap: [AppComponent],
   providers: [

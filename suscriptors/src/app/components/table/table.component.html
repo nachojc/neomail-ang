@@ -1,59 +1,28 @@
 <table class="wp-list-table widefat fixed">
-  <thead>
-    <tr>
-      <ng-container *ngFor="let item of dto.header">
-          <ng-container *ngIf="item.type == 'radio' else header" >
-              <th  class="manage-column column-cb check-column">
-                  <label class="screen-reader-text" for="select_all">Seleccionar todos</label>
-                  <input type="checkbox" name="select_all" id="select_all">
-              </th>
-          </ng-container>
-          <ng-template #header>
-            <ng-container *ngIf="item.sort else description">
-              <th role="columnheader" class="manage-column column-primary sortable desc" scope="col"><a role="button" tabindex="0"><span>{{item.name}}</span><span class="sorting-indicator"></span></a></th>
-            </ng-container>
-          </ng-template>
-          <ng-template #description>
-              <th role="columnheader" class="manage-column desc" scope="col">{{item.name}}</th>
-          </ng-template>
-      </ng-container>
-    </tr>
+    <thead>
+        <neo-table-header [data]="dto.header"></neo-table-header>
   </thead>
   <tbody>
-      <ng-container *ngFor="let item of dto.data">
-        <tr *ngIf="item.length">
-          <td *ngFor="let val of item"></td>
-        </tr>
+      <ng-container *ngIf="dto.data?.length else loading">
+          <neo-table-row *ngFor="let item of dto.data" 
+          (edit)="editItem($event)"
+          (view)="viewItem($event)"
+          [data]="item" 
+          ></neo-table-row>
       </ng-container>
-
-      <tr>
-        <td class="check-column"><input type="checkbox" name="select_all" id="select_all"></td>
-        <td class="manage-column column-primary has-row-actions column-username"><strong><a class="row-title" href="#/edit/1">nachojc@ipsoft.es</a></strong><p style="margin: 0px;">nachojc </p><div><div class="row-actions"><span class="edit"><a href="#/edit/1">Editar</a></span></div><button class="toggle-row" type="button"><span class="screen-reader-text">Mostrar más detalles</span></button></div></td>
-        <td>a</td>
-        <td>a</td>
-        <td>a</td>
-        <td>a</td>
-      </tr>
-
-
   </tbody>
   <tfoot>
-      <tr>
-          <ng-container *ngFor="let item of dto.header">
-              <ng-container *ngIf="item.type == 'radio' else header" >
-                  <th  class="manage-column column-cb check-column">
-                      <input type="checkbox" name="select_all" id="select_all">
-                  </th>
-              </ng-container>
-              <ng-template #header>
-                <ng-container *ngIf="item.sort else description">
-                  <th role="columnheader" class="manage-column column-primary sortable desc" scope="col"><a role="button" tabindex="0"><span>{{item.name}}</span><span class="sorting-indicator"></span></a></th>
-                </ng-container>
-              </ng-template>
-              <ng-template #description>
-                  <th role="columnheader" class="manage-column desc" scope="col">{{item.name}}</th>
-              </ng-template>
-          </ng-container>
-        </tr>
+      <neo-table-header [data]="dto.header"></neo-table-header>
   </tfoot>
 </table>
+
+
+
+<ng-template #loading>
+    <ng-container *ngIf="dto.data==null else nodata">
+        <tr class="loading"><td></td><td colspan="5">Loading data ....</td></tr>
+    </ng-container>
+</ng-template>
+<ng-template #nodata>
+    <tr class="loading"><td></td><td colspan="5">No data ....</td></tr>
+</ng-template>

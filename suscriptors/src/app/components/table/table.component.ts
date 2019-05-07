@@ -21,4 +21,11 @@ export class TableComponent implements OnInit {
   ngOnInit() {
   }
 
+  editItem(id: number) {
+    console.log(id);
+  }
+  viewItem(id: number) {
+    console.log(id);
+  }
+
 }

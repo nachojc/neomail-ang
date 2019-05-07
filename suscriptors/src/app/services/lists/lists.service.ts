@@ -7,25 +7,25 @@ const URL = 'http://localhost:3200';
   providedIn: 'root'
 })
 export class ListsService {
-  private lists = [];
-  private lists$ = new BehaviorSubject<any>(this.lists);
+  private _lists = [];
+  private _lists$ = new BehaviorSubject<any>(this._lists);
 
   constructor(private http: HttpClient) { }
 
 
-  getLists(page: number = 1): Observable<any> {
-    if ( !this.lists.length ) {
-      this.http.get(URL + '/wp-json/neomail/v1/list?p=' + page)
-        .subscribe((data: any[]) => {
-          this.lists = data;
-          this.lists$.next(this.lists);
+  getLists(): Observable<any> {
+    if ( !this._lists.length ) {
+      this.http.get(URL + '/wp-json/neomail/v1/lists')
+        .subscribe((data: any) => {
+          this._lists = data.attributes;
+          this._lists$.next(this._lists);
         });
     }
 
-    return this.lists$.asObservable();
+    return this._lists$.asObservable();
   }
 
   reset() {
-    this.lists = [];
+    this._lists = [];
   }
 }

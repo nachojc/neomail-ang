@@ -1,0 +1,16 @@
+
+<td class="check-column">
+  <input type="checkbox" name="select_all" id="select_all">
+</td>
+<td class="manage-column column-primary has-row-actions column-username">
+  <strong><a class="row-title" href="#/edit/1">{{data.email}}</a></strong>
+  <p style="margin: 0px;">{{data.name}} </p>
+  <div><div class="row-actions">
+    <span class="edit"><a href="#/edit/{{data.id}}">Editar</a></span>
+  </div></div>
+</td>
+<td>{{data.company}}</td>
+<td>{{ getMailLists()}}</td>
+<td>{{getMailStatus()}}</td>
+
+<td>{{data.date}}</td>
