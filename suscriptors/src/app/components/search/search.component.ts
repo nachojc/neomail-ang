@@ -1,5 +1,4 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
-import { Subscription } from 'rxjs';
 import { ListsService } from 'src/app/services/lists/lists.service';
 import { ListStatusEnum } from 'src/app/enums/status';
 import { ListOption } from 'src/app/services/lists/lists.model';
@@ -9,8 +8,8 @@ import { ListOption } from 'src/app/services/lists/lists.model';
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss']
 })
-export class SearchComponent implements OnInit, OnDestroy {
-  private lists$: Subscription;
+export class SearchComponent {
+
   search = {list : -1, status: -1, search: ''};
 
   status = ListStatusEnum;
@@ -26,12 +25,6 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   constructor(private listService: ListsService) { }
 
-  ngOnInit() {
-  //   this.lists$ = this.listService.getLists(-1).subscribe((data) => {this.changeListSelction( data); });
-  }
-  ngOnDestroy(): void {
-    this.lists$.unsubscribe();
-  }
   // private changeListSelction(data: any []) {
   //   this.listSelection = [{ id: '0', name: 'Todos'}].concat(data);
   // }

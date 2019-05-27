@@ -9,10 +9,11 @@ import { AppComponent } from './app.component';
 
 import { MainComponent } from './pages/main/main.component';
 import { AddUserComponent } from './pages/add-user/add-user.component';
-import { TableComponent } from './components/table/table.component';
 import { SearchComponent } from './components/search/search.component';
 import { HttpClientModule } from '@angular/common/http';
 import { TableModule } from './components/table/table.module';
+import { EditUserComponent } from './pages/edit-user/edit-user.component';
+import { EnumToArrayPipe } from './pipes/enumToArray';
 
 
 @NgModule({
@@ -20,8 +21,9 @@ import { TableModule } from './components/table/table.module';
     AppComponent,
     MainComponent,
     AddUserComponent,
-
-    SearchComponent
+    EditUserComponent,
+    SearchComponent,
+    EnumToArrayPipe
   ],
   imports: [
     BrowserModule,

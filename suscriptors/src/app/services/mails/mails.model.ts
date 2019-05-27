@@ -32,7 +32,7 @@ export interface StatusRequest {
 }
 
 export interface ItemDataMail {
-    id: number;
+    id: string;
     name: string;
     last_name?: string;
     company: string;
@@ -40,8 +40,10 @@ export interface ItemDataMail {
     lists: string;
     email: string;
     description?: string;
-    date: string;
-    last: string;
+    date?: string;
+    last?: string;
+    created_at?: string;
+    updated_at?: string;
     deleted?: number;
 }
 

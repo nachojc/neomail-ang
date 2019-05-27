@@ -1,0 +1,67 @@
+
+<form #mailForm="ngForm">
+  <table class="form-table" *ngIf="data else loading">
+    <tr class="form-required">
+      <th scope="row"><label for="data_name">Nombre<span class="description"> (obligatorio)</span></label></th>
+      <td>
+        <input id="data_name" class="regular-text" type="text" 
+        [(ngModel)]="data.name" name="name">
+      </td>
+    </tr>
+    <tr class="form-required">
+      <th scope="row"><label for="last_name">Apellido</label></th>
+      <td>
+        <input id="last_name" class="regular-text" type="text" 
+        [(ngModel)]="data.last_name" name="last_name">
+      </td>
+    </tr>
+    <tr class="form-required">
+      <th scope="row"><label for="data_company">Company</label></th>
+      <td>
+        <input id="data_company" class="regular-text" type="text" 
+        [(ngModel)]="data.company" name="company">
+      </td>
+    </tr>
+    <tr class="form-required">
+      <th scope="row"><label for="data_email">Mail<span class="description"> (obligatorio)</span></label></th>
+      <td>
+        <input id="data_email" class="regular-text" type="text" 
+        [(ngModel)]="data.email" name="email">
+      </td>
+    </tr>
+    <tr class="form-required">
+      <th scope="row"><label for="data_List">Listas de distribucion<span class="description"> </span></label></th>
+      <td>
+        <input id="data_List" class="regular-text" type="text" 
+        [(ngModel)]="data.lists" name="lists">
+      </td>
+    </tr>
+    <tr class="form-required">
+      <th scope="row"><label for="data_description">Descripcion</label></th>
+      <td> 
+        <textarea id="data_description" class="regular-text" rows="5" 
+        [(ngModel)]="data.description" name="description"></textarea>
+      </td>
+    </tr>
+    <tr class="form-required">
+      <th scope="row"><label for="data_status">Descripcion</label></th>
+      <td>
+          <select id="data_status" [(ngModel)]="data.status" name="status">
+              <option *ngFor="let item of statusOptions | enumToArray" [value]="item.id">{{item.value}}</option>
+            </select>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <button class="button button-large" (click)="onCancel()">Cancelar</button>
+      </td>
+      <td class="regular-text">
+        <button class="button button-primary right" (click)="onSubmit()" [disabled]="mailForm.invalid || mailForm.untouched">Guardar</button>
+      </td>
+    </tr>
+  </table>
+</form>
+
+<ng-template #loading>
+  Loading
+</ng-template>

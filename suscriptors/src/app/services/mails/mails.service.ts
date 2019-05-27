@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject, Subject, of } from 'rxjs';
 import { DataMail, ItemDataMail } from './mails.model';
+import { first } from 'rxjs/operators';
 
 const URL = 'http://localhost:3200';
 @Injectable({
   providedIn: 'root'
 })
 export class MailsService {
-  private _mails = [];
+  private _mails: ItemDataMail[] = [];
   private _mails$ = new BehaviorSubject<any>(this._mails);
 
   constructor(private http: HttpClient) { }
@@ -26,7 +27,29 @@ export class MailsService {
     return this._mails$.asObservable();
   }
 
+  getMail(id: string): Observable<ItemDataMail> {
+    const mail: ItemDataMail[] = this._mails.filter((m: ItemDataMail) => m.id === '' + id);
+    if (mail.length) {
+      return of(mail[0]);
+    }
+    const _mail$: Subject<ItemDataMail> = new Subject();
+    this.http.get(URL + '/wp-json/neomail/v1/mail/' + id)
+    .subscribe((data:ItemDataMail) => {
+      _mail$.next(data);
+    });
+
+    return _mail$.asObservable();
+  }
   reset() {
     this._mails = [];
   }
+  updateMail(data: ItemDataMail) {
+    data.date = data.date || data.created_at;
+    return this.http.put(URL + '/wp-json/neomail/v1/mail/upt/' + data.id + '?v=' + data.date , data);
+  }
+
+  addMail(data: ItemDataMail) {
+    return this.http.post(URL + '/wp-json/neomail/v1/mail/add/' , data);
+  }
+
 }
