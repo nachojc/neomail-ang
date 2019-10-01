@@ -32,8 +32,16 @@
     <tr class="form-required">
       <th scope="row"><label for="data_List">Listas de distribucion<span class="description"> </span></label></th>
       <td>
-        <input id="data_List" class="regular-text" type="text" 
-        [(ngModel)]="data.lists" name="lists">
+          <p-autoComplete class="regular-text" 
+            [suggestions]="resultsList" 
+            (completeMethod)="searchLists($event)" 
+            placeholder="Lists"
+            [dropdown]="true"
+            field="name"
+            [multiple]="true"></p-autoComplete>
+        <!-- <input id="data_List" class="regular-text" type="text" 
+        [(ngModel)]="data.lists" name="lists"> -->
+        
       </td>
     </tr>
     <tr class="form-required">
@@ -44,7 +52,7 @@
       </td>
     </tr>
     <tr class="form-required">
-      <th scope="row"><label for="data_status">Descripcion</label></th>
+      <th scope="row"><label for="data_status">Estatus</label></th>
       <td>
           <select id="data_status" [(ngModel)]="data.status" name="status">
               <option *ngFor="let item of statusOptions | enumToArray" [value]="item.id">{{item.value}}</option>

@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { FormsModule } from '@angular/forms';
 import { APP_BASE_HREF } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -14,7 +13,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { TableModule } from './components/table/table.module';
 import { EditUserComponent } from './pages/edit-user/edit-user.component';
 import { EnumToArrayPipe } from './pipes/enumToArray';
+import { FormsModule } from '@angular/forms';
+import { NeoSelectModule } from 'libs/neo-lib/src/components/select/select.module';
+import { NeoSelectComponent } from 'libs/neo-lib/src/components/select/select.component';
 
+
+import {AutoCompleteModule} from 'primeng/autocomplete';
 
 @NgModule({
   declarations: [
@@ -23,14 +27,18 @@ import { EnumToArrayPipe } from './pipes/enumToArray';
     AddUserComponent,
     EditUserComponent,
     SearchComponent,
-    EnumToArrayPipe
+    EnumToArrayPipe,
+    NeoSelectComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     FormsModule,
+    AppRoutingModule,
     HttpClientModule,
-    TableModule
+    AutoCompleteModule,
+
+    TableModule,
+    // NeoSelectModule
   ],
   bootstrap: [AppComponent],
   providers: [

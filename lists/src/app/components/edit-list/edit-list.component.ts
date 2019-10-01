@@ -9,7 +9,7 @@ import { ItemDataList } from 'src/app/models/list.model';
   templateUrl: './edit-list.component.html',
   styleUrls: [
     './edit-list.component.scss',
-    '../../../../libs/neo-lib/src/styles/input/input.scss'
+    // '../../../../libs/neo-lib/src/styles/input/input.scss'
   ]
 })
 export class EditListComponent {

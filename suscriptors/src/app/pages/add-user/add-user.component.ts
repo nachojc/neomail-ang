@@ -26,9 +26,13 @@ export class AddUserComponent implements OnInit {
           this.mailService.reset();
           this.onCancel();
         } else {
-          alert('no creado');
+          alert('Ya existe este correo');
         }
-      });
+      },
+        e => {
+          alert('Formato incorrecto de mail');
+        }
+      );
   }
   onCancel() {
     this.router.navigate(['/']);

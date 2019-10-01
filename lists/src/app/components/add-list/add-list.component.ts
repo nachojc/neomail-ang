@@ -9,7 +9,7 @@ import { first} from 'rxjs/operators';
   templateUrl: './add-list.component.html',
   styleUrls: [
     './add-list.component.scss',
-    '../../../../libs/neo-lib/src/styles/input/input.scss'
+    // '../../../../libs/neo-lib/src/styles/input/input.scss'
   ]
 })
 export class AddListComponent {
