@@ -33,13 +33,20 @@
       <th scope="row"><label for="data_List">Listas de distribucion<span class="description"> </span></label></th>
       <td>
           <p-autoComplete class="regular-text" 
+            [(ngModel)]="listValue"
             [suggestions]="resultsList" 
             (completeMethod)="searchLists($event)" 
             placeholder="Lists"
-            [dropdown]="true"
-            field="name"
-            [multiple]="true"></p-autoComplete>
-        <!-- <input id="data_List" class="regular-text" type="text" 
+
+            name="list"
+            (onDropdownClick)="handleDropdown($event)"
+            ></p-autoComplete>
+            
+            
+            <!--
+              field="id"
+           [multiple]="true"
+           <input id="data_List" class="regular-text" type="text" 
         [(ngModel)]="data.lists" name="lists"> -->
         
       </td>

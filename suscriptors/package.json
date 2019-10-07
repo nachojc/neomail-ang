@@ -22,7 +22,7 @@
     "@angular/router": "~7.2.12",
     "core-js": "^2.6.5",
     "primeicons": "^2.0.0",
-    "primeng": "^8.0.3",
+    "primeng": "^8.0.4",
     "rxjs": "~6.4.0",
     "zone.js": "~0.8.26"
   },

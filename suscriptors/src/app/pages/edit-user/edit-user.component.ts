@@ -15,10 +15,17 @@ import { ListsService } from 'src/app/services/lists/lists.service';
 })
 export class EditUserComponent implements OnInit {
   statusOptions = StatusText;
+  listValue;
   dropdownList = [];
   selectedItems = [];
-  resultsList: string[];
-  private originList: object[];
+  resultsList = [
+    {id: '8', name: 'Carlos Matias'},
+    {id: '6', name: 'ignacio'},
+    {id: '1', name: 'mio'},
+    {id: '4', name: 'mononn ikni en casa'},
+    {id: '7', name: 'test'},
+    {id: '3', name: 'trea'}];
+  // private originList: object[];
 
   data: ItemDataMail;
   private _id: string;
@@ -34,7 +41,7 @@ export class EditUserComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       this._id = params.get('id');
       this.loadMail();
-      this.loadLists();
+      // this.loadLists();
     });
   }
 
@@ -50,9 +57,10 @@ export class EditUserComponent implements OnInit {
 
   searchLists(index) {
     // console.log(index);
+    this.loadLists();
   }
   handleDropdown(event) {
-    console.log(event);
+    this.loadLists(event.query);
   }
   private loadMail() {
     this.mailService.getMail(this._id)
@@ -61,10 +69,11 @@ export class EditUserComponent implements OnInit {
       this.data = mail;
     });
   }
-  private loadLists() {
+  private loadLists(textToFilter?: string) {
     this.listService.getLists().subscribe((lists: any[]) => {
       if (lists.length) {
-        this.resultsList = lists;
+        debugger;
+        this.resultsList = lists.map(e => e.name);
         // this.originList = lists;
         // this.resultsList = lists.map( e => e.name);
         console.log(this.resultsList);
