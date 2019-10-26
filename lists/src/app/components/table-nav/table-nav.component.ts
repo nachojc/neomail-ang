@@ -24,9 +24,10 @@ export class TableNavComponent implements OnInit, OnDestroy {
   constructor(private lists: ListsService) {}
 
   ngOnInit(): void {
-    this._nav$ = this.lists.getNavParams().subscribe((data: NavPagesParams) => {
-      this.page = data;
-    });
+    this._nav$ = this.lists.getNavParams()
+      .subscribe((data: NavPagesParams) => {
+        this.page = data;
+      });
   }
   ngOnDestroy(): void {
     this._nav$.unsubscribe();

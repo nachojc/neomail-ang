@@ -24,7 +24,7 @@ export class MainComponent implements OnInit, OnDestroy {
     private lists: ListsService,
     private mails: MailsService
     ) { }
-  
+
   ngOnInit() {
     this.lists.getLists()
     .pipe()
@@ -39,6 +39,4 @@ export class MainComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this._mails$.unsubscribe();
   }
-  
-
 }

@@ -23,7 +23,7 @@ export class SearchComponent {
     }
   private _lists: ListOption[] = [{ id: '-1', name: 'Todos'}];
 
-  constructor(private listService: ListsService) { }
+  // constructor(private listService: ListsService) { }
 
   // private changeListSelction(data: any []) {
   //   this.listSelection = [{ id: '0', name: 'Todos'}].concat(data);

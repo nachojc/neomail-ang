@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "../../wordpress/wp-content/plugins/neomail/assets/ang/lists",
+            "outputPath": "../../php/wordpress/wp-content/plugins/neomail/assets/ang/lists",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",

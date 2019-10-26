@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject, Subject, of } from 'rxjs';
 import { DataMail, ItemDataMail } from './mails.model';
-import { first } from 'rxjs/operators';
 
 const URL = 'http://localhost:3200';
 @Injectable({
@@ -34,7 +33,7 @@ export class MailsService {
     }
     const _mail$: Subject<ItemDataMail> = new Subject();
     this.http.get(URL + '/wp-json/neomail/v1/mail/' + id)
-    .subscribe((data:ItemDataMail) => {
+    .subscribe((data: ItemDataMail) => {
       _mail$.next(data);
     });
 
@@ -45,11 +44,11 @@ export class MailsService {
   }
   updateMail(data: ItemDataMail) {
     data.date = data.date || data.created_at;
-    return this.http.put(URL + '/wp-json/neomail/v1/mail/upt/' + data.id + '?v=' + data.date , data);
+    return this.http.put(URL + '/wp-json/neomail/v1/mails/upt/' + data.id + '?v=' + data.date , data);
   }
 
   addMail(data: ItemDataMail) {
-    return this.http.post(URL + '/wp-json/neomail/v1/mail/add/' , data);
+    return this.http.post(URL + '/wp-json/neomail/v1/mails/add/' , data);
   }
 
 }
