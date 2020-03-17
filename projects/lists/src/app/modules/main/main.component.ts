@@ -1,11 +1,18 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Subscription, Subject } from 'rxjs';
 import { Columns } from '../../enums/colums';
-import { ModalComponent } from '../../components/modal/modal.component';
-import { Size } from '../../components/modal';
-import { Status, ItemDataList, ListsService, NavPagesParams} from '@neo/common';
+
+import { SizeModal } from '@neo/common';
+import { 
+  Status,
+  ItemDataList,
+  ListsService,
+  NavPagesParams,
+  ModalController,
+} from '@neo/common';
 import { takeUntil } from 'rxjs/operators';
 import { EventListItem } from '../../models/event-list-item.model';
+import { AddListComponent } from '../../components/add-list/add-list.component';
 
 
 
@@ -22,7 +29,6 @@ export class MainComponent implements OnInit, OnDestroy {
   private _editValue: ItemDataList;
   private destroy$: Subject<void> = new Subject<void>();
 
-  @ViewChild( 'neo-modal', {static: true} ) modal: ModalComponent;
   modalTitle = '';
   dto = {
     nav: {actived : 0, deleted : 0},
@@ -30,7 +36,9 @@ export class MainComponent implements OnInit, OnDestroy {
     data: []
   };
 
-  constructor(private lists: ListsService) { }
+  constructor(
+    private lists: ListsService,
+    private modal: ModalController) { }
 
   ngOnInit() {
     this.lists.getLists()
@@ -66,12 +74,18 @@ export class MainComponent implements OnInit, OnDestroy {
     return false;
   }
   addList() {
-    this.modalAdd = true;
-    this.modalTitle = 'Nueva lista';
-    this.modal.open(Size.Small);
+    const modalConfig = {
+      config: {
+        animated: true,
+        closeModal: () => { console.log('aaaa');
+        }
+      },
+    };
+    this.modal.open(AddListComponent, modalConfig);
+    // this.modal.open(SizeModal.Small);
   }
   closeModal() {
-    this.modal.close();
+    this.modal.dismiss();
   }
   onChange(val: string) {
     // console.log(val);
@@ -79,9 +93,13 @@ export class MainComponent implements OnInit, OnDestroy {
 
   editItem(id) {
     this._editValue =  this.dto.data.filter(obj => obj.id === id)[0];
-    this.modalAdd = false;
-    this.modalTitle = 'Editar lista';
-    this.modal.open(Size.Small);
+    const modalConfig = {
+      config: {
+        animated: true
+      },
+      data: this._editValue
+    };
+    this.modal.open(AddListComponent, modalConfig);
   }
   getEditValue() {
     return this._editValue;

@@ -3,24 +3,30 @@ import {CommonModule} from '@angular/common';
 import { MainComponent } from './main.component';
 import { MainRoutingModule } from './main.routing';
 
-import { TableModule } from '@neo/common';
+import { TableModule, ModalControllerModule } from '@neo/common';
 import { ListItemComponent } from '../../components/list-item/list-item.component';
+import { AddListComponent } from '../../components/add-list/add-list.component';
 
 
 @NgModule({
   declarations: [
     MainComponent,
-    ListItemComponent
+    ListItemComponent,
+    AddListComponent
   ],
   imports: [
     CommonModule,
     MainRoutingModule,
-    TableModule
+    TableModule,
+    ModalControllerModule
   ],
   exports: [
     MainComponent
   ],
   providers: [
+  ],
+  entryComponents: [
+    AddListComponent
   ]
 })
 export class MainModule {

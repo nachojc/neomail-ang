@@ -10,11 +10,8 @@ import { Status } from '../../enums/status';
 export class TableComponent {
   @Input() action: Status;
   @Input()
-    set data( data: any ) {
-      console.log(data);
-      
-      this.dto = data;
-    }
+    set data( data: any ) { this.dto = data; }
+    
   @Output() edit: EventEmitter<number> = new EventEmitter<number>();
   @Output() view: EventEmitter<number> = new EventEmitter<number>();
   dto = {header: [],  data: [{}], page: 1, total: 0};
