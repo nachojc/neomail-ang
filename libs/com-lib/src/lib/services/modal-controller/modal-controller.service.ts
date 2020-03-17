@@ -14,17 +14,6 @@ export class ModalController {
     ) {
   }
 
-  /**
-   * Will presente de Component as a modal the component must be imported in it's module as entryComponents
-   */
-  public present(component: ComponentType<unknown>, onDismiss?: () => void): void {
-    console.warn('DEPRECATED: present() method is deprecated, use open() method');
-
-    this.overlayRef = this.open(component);
-
-    this.overlayRef.onDidDismiss().subscribe(() => onDismiss);
-  }
-
   public dismiss(): void {
     this.overlayRef.close();
   }
