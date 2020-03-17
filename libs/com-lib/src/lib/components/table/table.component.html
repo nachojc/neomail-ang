@@ -1,0 +1,28 @@
+<table class="wp-list-table widefat fixed">
+  <thead>
+        <neo-table-header [data]="dto.header"></neo-table-header>
+  </thead>
+  <tbody>
+    <ng-content *ngIf="dto.data?.length else loading" ></ng-content>
+  </tbody>
+  <tfoot>
+        <neo-table-header [data]="dto.header"></neo-table-header>
+  </tfoot>
+</table>
+
+
+
+<ng-template #loading>
+    <ng-container *ngIf="dto.data == null else nodata">
+        <tr class="loading"><td></td><td colspan="5">Loading data ....</td></tr>
+    </ng-container>
+</ng-template>
+<ng-template #nodata>
+    <tr class="loading"><td></td><td colspan="5">No data ....</td></tr>
+</ng-template>
+
+
+
+
+
+

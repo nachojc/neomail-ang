@@ -1,0 +1,20 @@
+<td class="check-column">
+  <input type="checkbox" name="select_all" id="select_all">
+</td>
+<td class="manage-column column-primary has-row-actions">
+  <strong><a class="row-title" href="#">{{value?.name}}</a></strong>
+  <div>
+    <div class="row-actions" *ngIf="isActives()">
+      <span class="edit"><a href="#" (click)="editItem()">Editar</a></span>
+      <span class="view_subscribers"> | <a href="#" (click)="viewSubscriptors()">Ver suscriptores</a></span>
+      <span class="trash"> | <a href="#" (click)="removeItem()">Mover a la papelera</a></span>
+    </div>
+    <div class="row-actions" *ngIf="!isActives()">
+      <span><a href="#" (click)="reverteItem()">Restablecer</a></span> | <span class="delete"><a class="submitdelete" href="#" (click)="deleteItem()">Borrar permanentemente</a></span>
+    </div>
+  </div>
+</td>
+<td>{{value?.description}}</td>
+<td>{{value?.status}}</td>
+<td>{{value?.total - value?.status}}</td>
+<td>{{value?.date}}</td>
