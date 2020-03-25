@@ -108,9 +108,7 @@ export class MainComponent implements OnInit, OnDestroy {
     };
     const ref = this.modal.open(AddListComponent, modalConfig);
     ref.onClose().subscribe(res => {
-      console.log(res);
-      
-      // if(res && res.data){ this.lists.addList(res.data); }
+      if(res && res.data){ this.lists.updateItem(res.data); }
     });
   }
 }
