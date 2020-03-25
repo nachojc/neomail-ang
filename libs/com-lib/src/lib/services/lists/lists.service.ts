@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject, Subject } from 'rxjs';
 import { first } from 'rxjs/operators';
 
-import { FieldOption, DeleteRequest, DataList, ItemDataList } from '../../models/lists.model';
+import { FieldOption, DeleteRequest, DataList, ItemDataList, DataListNewRequest } from '../../models/lists.model';
 import { NavPagesParams } from '../../models/page.model';
 import { OrderOption } from '../../enums/order';
 import { Status } from '../../enums/status';
@@ -48,7 +48,7 @@ export class ListsService {
       this._status = typeof status === 'number' ? status : Status.Actives;
       this._page = page;
 
-      this.http.get(`${this.ENV.api.baseURL}/wp-json/neomail/v1/list` + this._getUrlParams())
+      this.http.get(`${this.ENV.api.baseURL}/list` + this._getUrlParams())
         .subscribe((data: DataList) => {
           this._lists = data;
           this._lists.page = page;
@@ -69,9 +69,10 @@ export class ListsService {
     this._lists = {active: 0, deleted: 0, step: 1, attributes: []};
   }
 
-  addList(data: any ) {
+  addList(data: DataListNewRequest | any ) {
     const result = new Subject();
-    this.http.post(URL + '/add', data)
+
+    this.http.post(`${this.ENV.api.baseURL}/list/add`, data)
     .subscribe(id => {
       this.reset();
       this.getLists();
@@ -80,7 +81,7 @@ export class ListsService {
     return result.asObservable();
   }
   updateItem(data: ItemDataList): Observable<number> {
-    this.http.put(URL + '/upt/' + data.id + '?v=' + data.last, data)
+    this.http.put(`${this.ENV.api.baseURL}/list/upt/${data.id}?v=${data.last}`, data)
       .pipe(first())
       .subscribe( (dto: ItemDataList) => {
         if (!!dto) {
@@ -121,7 +122,7 @@ export class ListsService {
     if (confirm) {
       data.v = this._lists.attributes.filter(obj => obj.id === id)[0].last;
     }
-    return this.http.put(URL + `/del/${id}`, data);
+    return this.http.put(`${this.ENV.api.baseURL}/list/del/${id}`, data);
   }
   private _getUrlParams() {
     const page = '?p=' + this._page;

@@ -7,7 +7,8 @@ import {
   ListsService,
   NavPagesParams,
   OverlayService,
-  DialogModalSizeEnum
+  DialogModalSizeEnum,
+  DataListNewRequest
 } from '@neo/common';
 import { takeUntil } from 'rxjs/operators';
 import { EventListItem, EventListItemType } from '../../models/event-list-item.model';
@@ -59,7 +60,6 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   onActionList(ev: EventListItem){
-
     switch (ev.type) {
       case EventListItemType.edit:
       this._editItem(ev.id);
@@ -80,17 +80,12 @@ export class MainComponent implements OnInit, OnDestroy {
   }
   addList() {
     const ref = this.modal.open(AddListComponent,
-      {
-        animated: true,
-        hasBackdrop: true,
-        size: DialogModalSizeEnum.Small
-      }
+      { animated: true, hasBackdrop: true, size: DialogModalSizeEnum.Small }
       );
-      ref.onClose().subscribe(res => {
-            console.log(res);
-
-      });
-}
+    ref.onClose().subscribe(res => {
+      if(res && res.data){ this.lists.addList(res.data); }
+    });
+  }
   closeModal() {
     // this.modal.dismiss();
   }
@@ -111,6 +106,10 @@ export class MainComponent implements OnInit, OnDestroy {
       size: DialogModalSizeEnum.Small,
       data: _editValue,
     };
-    this.modal.open(AddListComponent, modalConfig);
+    const ref = this.modal.open(AddListComponent, modalConfig);
+    ref.onClose().subscribe(res => {
+      if(res && res.data){ this.lists.addList(res.data); }
+      // if(res && res.data){ this.lists.addList(res.data); }
+    });
   }
 }

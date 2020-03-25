@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   api: {
-    baseURL: "http://localhost:3200"
+    baseURL: "http://localhost:3200/wp-json/neomail/v1"
   }
 };
 

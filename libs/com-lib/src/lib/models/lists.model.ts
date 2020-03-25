@@ -25,4 +25,8 @@ export interface DataList {
     page?: number;
     attributes: ItemDataList[];
 }
+export interface DataListNewRequest {
+    name: string;
+    description: string;
+}
 
