@@ -1,17 +1,16 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
-import { Subscription, Subject } from 'rxjs';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subject } from 'rxjs';
 import { Columns } from '../../enums/colums';
 
-import { SizeModal } from '@neo/common';
 import { 
   Status,
-  ItemDataList,
   ListsService,
   NavPagesParams,
-  ModalController,
+  OverlayService,
+  DialogModalSizeEnum
 } from '@neo/common';
 import { takeUntil } from 'rxjs/operators';
-import { EventListItem } from '../../models/event-list-item.model';
+import { EventListItem, EventListItemType } from '../../models/event-list-item.model';
 import { AddListComponent } from '../../components/add-list/add-list.component';
 
 
@@ -24,9 +23,7 @@ import { AddListComponent } from '../../components/add-list/add-list.component';
 export class MainComponent implements OnInit, OnDestroy {
   action: Status = Status.Actives ;
   page: NavPagesParams;
-  modalAdd = true;
-  private list$: Subscription;
-  private _editValue: ItemDataList;
+
   private destroy$: Subject<void> = new Subject<void>();
 
   modalTitle = '';
@@ -38,8 +35,9 @@ export class MainComponent implements OnInit, OnDestroy {
 
   constructor(
     private lists: ListsService,
-    private modal: ModalController) { }
-
+    private modal: OverlayService
+    ) { }
+  
   ngOnInit() {
     this.lists.getLists()
       .pipe(takeUntil(this.destroy$))
@@ -60,9 +58,16 @@ export class MainComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  onClickList(ev: EventListItem){
-    console.log(ev);
+  onActionList(ev: EventListItem){
+
+    switch (ev.type) {
+      case EventListItemType.edit:
+      this._editItem(ev.id);
+        break;
     
+      default:
+        break;
+    }
   }
 
   reLoad(target: Status) {
@@ -74,37 +79,38 @@ export class MainComponent implements OnInit, OnDestroy {
     return false;
   }
   addList() {
-    const modalConfig = {
-      config: {
+    const ref = this.modal.open(AddListComponent,
+      {
         animated: true,
-        closeModal: () => { console.log('aaaa');
-        }
-      },
-    };
-    this.modal.open(AddListComponent, modalConfig);
-    // this.modal.open(SizeModal.Small);
-  }
+        hasBackdrop: true,
+        size: DialogModalSizeEnum.Small
+      }
+      );
+      ref.onClose().subscribe(res => {
+            console.log(res);
+
+      });
+}
   closeModal() {
-    this.modal.dismiss();
+    // this.modal.dismiss();
   }
   onChange(val: string) {
     // console.log(val);
   }
 
-  editItem(id) {
-    this._editValue =  this.dto.data.filter(obj => obj.id === id)[0];
-    const modalConfig = {
-      config: {
-        animated: true
-      },
-      data: this._editValue
-    };
-    this.modal.open(AddListComponent, modalConfig);
-  }
-  getEditValue() {
-    return this._editValue;
-  }
   viewItem(id) { console.log(id);  }
 
   isActives() { return this.action === Status.Actives; }
+
+
+  private _editItem(id) {
+    const _editValue =  this.dto.data.filter(obj => obj.id === id)[0];
+    const modalConfig = {
+      animated: true,
+      hasBackdrop: true,
+      size: DialogModalSizeEnum.Small,
+      data: _editValue,
+    };
+    this.modal.open(AddListComponent, modalConfig);
+  }
 }

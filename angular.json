@@ -150,7 +150,8 @@
               "projects/lists/src/assets"
             ],
             "styles": [
-              "projects/lists/src/styles.scss"
+              "projects/lists/src/styles.scss",
+              "libs/com-lib/src/styles/_modal.scss"
             ],
             "scripts": []
           },
@@ -272,7 +273,8 @@
               "projects/suscriptors/src/assets"
             ],
             "styles": [
-              "projects/suscriptors/src/styles.scss"
+              "projects/suscriptors/src/styles.scss",
+              "libs/com-lib/src/styles/_modal.scss"
             ],
             "scripts": []
           },

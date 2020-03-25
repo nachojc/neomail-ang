@@ -1,64 +1,35 @@
-import { Component, Output, EventEmitter, Input, Renderer2, ElementRef, OnInit } from '@angular/core';
-import {
-  trigger,
-  state,
-  style,
-  animate,
-  transition
-} from '@angular/animations';
+import { Component} from '@angular/core';
 
-import { SizeModal, OverlayControllerRef, OverlayParams } from '@neo/common';
+import { ModalOverlayRef } from '@neo/common';
 let index = 1;
 @Component({
-  selector: 'neo-modal',
+  selector: 'neo-add-list',
   templateUrl: './add-list.component.html',
   styleUrls: ['./add-list.component.scss'],
-  host: {
-    '[attr.id]' : 'modalId',
-    '[class.open]': 'opened',
-    'role': 'dialog'
-  },
-  // animations: [
-  //   trigger('openClose', [
-  //     state('open', style({
-  //       opacity: 1
-  //     })),
-  //     state('closed', style({
-  //       opacity: 0,
-  //     })),
-  //     transition('closed => open', [
-  //       animate('0.5s')
-  //     ]),
-  //   ]),
-  // ]
 })
-export class AddListComponent implements OnInit {
+export class AddListComponent {
 
+  dto = {name: null, description: null};
+  textTitle = "Add list";
   constructor(
-    public viewRef: OverlayControllerRef,
-    public viewParams: OverlayParams,
-  ) {
-  }
-  ngOnInit(): void {
-    debugger;
+    public viewRef: ModalOverlayRef,
+    ) {
+      if (viewRef.data.data ) {
+        this.textTitle = "Edit list";
+        this.dto = viewRef.data.data;
+
+      }
   }
 
-  // open(size?: Size): void {
-  //   this.render.addClass(this.elem.nativeElement, size || this.size);
-  //   this.opened = true;
-
-  // }
-  // close(): void {
-  //   this.opened = false;
-  //   this.closed.emit( this.opened );
-  // }
-  // cancel() {
-  //   this.close();
-  // }
-  // isOpen() {
-  //   return this.opened ? 'open' : 'closed';
-  // }
   close() {
-    this.viewRef.close('close');
+      this.viewRef.close();
+  }
+  send(){
+    if (this.isValid() ){
+      this.viewRef.close(this.dto);
+    }
+  }
+  isValid(){
+    return !!this.dto.name;
   }
 }

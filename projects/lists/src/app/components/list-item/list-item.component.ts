@@ -2,8 +2,6 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Status, ItemDataList } from '@neo/common';
 import { EventListItem, EventListItemType } from '../../models/event-list-item.model';
 
- 
-
 @Component({
   selector: 'neo-list-item',
   templateUrl: './list-item.component.html',
@@ -22,13 +20,13 @@ export class ListItemComponent  {
   @Output() action: EventEmitter<EventListItem> 
     = new EventEmitter<EventListItem>();
   
-
   isActives() { return this.status === Status.Actives; }
 
-  editItem() { this.action.emit({type: EventListItemType.edit, id: this._value.id}); }
+  editItem() {this.action.emit({type: EventListItemType.edit, id: this._value.id}); }
   viewSubscriptors() {this.action.emit({type: EventListItemType.view, id: this._value.id}); }
   removeItem() {this.action.emit({type: EventListItemType.remove, id: this._value.id}); }
   reverteItem() {this.action.emit({type: EventListItemType.reverte, id: this._value.id}); }
   deleteItem() {this.action.emit({type: EventListItemType.delete, id: this._value.id}); }
+
 
 }

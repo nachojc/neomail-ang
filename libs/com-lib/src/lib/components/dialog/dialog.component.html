@@ -1,0 +1,28 @@
+
+<div class="main">
+  <div class="modal-header">
+    <div>
+      <ng-content select="[header]"></ng-content>&nbsp;
+    </div>
+    <button type="button" class="modal-close" data-dismiss="modal" aria-label="Close" (click)="close()">
+        <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <ng-container [ngSwitch]="contentType">
+    <ng-container *ngSwitchCase="'string'">
+      <div class="box">
+        <div [innerHTML]="content"></div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'template'">
+      <ng-container *ngTemplateOutlet="content; context: context"></ng-container>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'component'">
+      <ng-container *ngComponentOutlet="content"></ng-container>
+    </ng-container>
+
+  </ng-container>
+  <ng-content select="[footer]"></ng-content>
+</div>

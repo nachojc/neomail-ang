@@ -11,7 +11,7 @@
   (edit)="editItem( $event )"
   (view)="viewItem( $event )"
   [data]="dto" [action]="action">
-<neo-list-item *ngFor="let item of dto.data" [value]="item" [status]="action" (action)="onClickList($event)"></neo-list-item>
+<neo-list-item *ngFor="let item of dto.data" [value]="item" [status]="action" (action)="onActionList($event)"></neo-list-item>
 </neo-table>
   
 <neo-table-nav [action]="action" (change)="onChange($event)" [page]="page"></neo-table-nav>
