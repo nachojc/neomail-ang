@@ -1,15 +1,17 @@
-  <div header>{{textTitle}}</div>
-  <div class="input-form">
+<form (ngSubmit)="onSubmit()" #heroForm="ngForm">
+  <div class="input-form form-group">
     <span><label for="name"> Nombre:</label></span>
-    <input type="text" id="name" [(ngModel)]="dto.name">
+    <input type="text" id="name" [(ngModel)]="dto.name" required>
+    <div [hidden]="name.valid || name.pristine" class="alert alert-danger"> Name is required </div>
   </div>
-  <div class="input-form">
+  <div class="input-form form-group">
     <span><label for="description"> Descripcion:</label></span>
     <input type="text" id="description" [(ngModel)]="dto.description">
   </div>
   <div footer>
     <p class="bottom">
       <button class="button button-large" (click)= "close()" >Cancelar</button>
-      <button class="button button-primary button-large" (click)= "send()" [disabled]="!isValid()">Enviar</button>
+      <button type="submit" class="button button-primary button-large" (click)= "onSubmit()" [disabled]="!isValid()">Enviar</button>
     </p>
   </div>
+</form>

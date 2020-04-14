@@ -151,7 +151,8 @@
             ],
             "styles": [
               "projects/lists/src/styles.scss",
-              "libs/com-lib/src/styles/_modal.scss"
+              "libs/com-lib/src/styles/_modal.scss",
+              "libs/com-lib/src/styles/_forms.scss"
             ],
             "scripts": []
           },
@@ -274,7 +275,8 @@
             ],
             "styles": [
               "projects/suscriptors/src/styles.scss",
-              "libs/com-lib/src/styles/_modal.scss"
+              "libs/com-lib/src/styles/_modal.scss",
+              "libs/com-lib/src/styles/_forms.scss"
             ],
             "scripts": []
           },

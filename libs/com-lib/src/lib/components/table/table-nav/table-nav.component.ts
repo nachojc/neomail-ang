@@ -1,7 +1,9 @@
 import { Component, Input, EventEmitter, Output } from '@angular/core';
 
 import { Status } from '../../../enums/status';
-import { NavPagesParams } from '../../../models/page.model';
+import { NavPagesParams, NavPagesEvent } from '../../../models/page.model';
+import { PageNavOptionEvent } from '../../../enums/table-nav';
+
 
 let count = 0;
 
@@ -29,26 +31,34 @@ export class TableNavComponent {
   };
 
 
-  @Output('change') _change: EventEmitter<any> = new EventEmitter();
+  @Output('change') _change: EventEmitter<NavPagesEvent> = new EventEmitter();
 
   isActives() { return this._action === Status.Actives; }
 
   onChangeSelection(e) {
-    this._change.emit(e.currentTarget.value);
+    e.stopImmediatePropagation();
+    this._change.emit({type: PageNavOptionEvent.selector, value: e.currentTarget.value});
   }
   onPrevious() {
-
+    const nextPage = this.page.page > 1 ? --this.page.page : this.page.page;
+    this._change.emit({type: PageNavOptionEvent.goPrevious, value: nextPage});
   }
   onNext() {
-
+    const nextPage = this.page.pages > this.page.page ? ++this.page.page : this.page.page;
+    this._change.emit({type: PageNavOptionEvent.goNext, value: nextPage});
   }
   onLast() {
-
+    this._change.emit({type: PageNavOptionEvent.goLast, value: this.page.pages});
   }
   onFirt() {
-
+    this._change.emit({type: PageNavOptionEvent.goFirst, value: 1});
   }
   onGoto(e) {
-
+    e.stopImmediatePropagation();
+    const val = parseInt(e.currentTarget.value, 10) ;
+    if (Number.isInteger(val) && val>0 && val !== this .page.page && val <= this .page.pages){
+      this._change.emit({type: PageNavOptionEvent.goTo, value: e.currentTarget.value});
+    }
+    e.currentTarget.value = this.page.page;
   }
 }

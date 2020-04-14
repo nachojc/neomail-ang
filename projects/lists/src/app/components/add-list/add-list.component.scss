@@ -1,7 +1,10 @@
-.input-form{
-    display: flex;
-    margin-top: 16px;
-    &>*{
-        width: 50%;
+:host{
+    flex-direction: column;
+    .input-form{
+        display: flex;
+        margin-top: 16px;
+        &>*{
+            width: 50%;
+        }
     }
 }

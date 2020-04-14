@@ -11,6 +11,7 @@ import { TableModule } from '@neo/common';
 import { ListItemComponent } from '../../components/list-item/list-item.component';
 import { AddListComponent } from '../../components/add-list/add-list.component';
 import { DialogComponent } from '@neo/common';
+import { ConfirmComponent } from '../../components/confirm/confirm.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { DialogComponent } from '@neo/common';
     MainComponent,
     ListItemComponent,
     DialogComponent,
-    AddListComponent
+    AddListComponent,
+    ConfirmComponent
   ],
   imports: [
     CommonModule,
@@ -34,7 +36,8 @@ import { DialogComponent } from '@neo/common';
   ],
   entryComponents: [
     DialogComponent,
-    AddListComponent
+    AddListComponent,
+    ConfirmComponent
   ]
 })
 export class MainModule {

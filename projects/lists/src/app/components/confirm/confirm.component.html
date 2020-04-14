@@ -1,0 +1,12 @@
+  <div class="title" *ngIf="confirmTitle">
+    <span>{{confirmTitle}}</span>
+  </div>
+  <div class="sub-title" *ngIf="confirmSubTitle">
+    <span>{{confirmSubTitle}}</span>
+  </div>
+  <div footer>
+    <p class="bottom">
+      <button class="button button-large" (click)= "close()" >No</button>
+      <button class="button button-primary button-large" (click)= "send()">Yes</button>
+    </p>
+  </div>

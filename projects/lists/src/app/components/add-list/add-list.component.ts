@@ -24,7 +24,7 @@ export class AddListComponent {
   close() {
       this.viewRef.close();
   }
-  send(){
+  onSubmit(){
     if (this.isValid() ){
       this.viewRef.close(this.dto);
     }

@@ -17,12 +17,18 @@ export class DialogComponent implements OnInit {
   contentType: 'template' | 'string' | 'component' = 'string';
   content: string | TemplateRef<any> | Type<any>;
   context;
-  
+  title: string;
+
   private _size: DialogModalSizeEnum = DialogModalSizeEnum.Medium;
 
   constructor(private ref: ModalOverlayRef) {
-    if (!!ref.data && ref.data.hasOwnProperty('size')) {
-      this._size = ref.data.size;
+    if (!!ref.data ) {
+      if (ref.data.hasOwnProperty('size')) {
+        this._size = ref.data.size;
+      }
+      if (ref.data.hasOwnProperty('title')) {
+        this.title = ref.data.title;
+      }
     }
   }
 

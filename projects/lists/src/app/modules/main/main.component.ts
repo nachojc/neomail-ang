@@ -8,13 +8,21 @@ import {
   NavPagesParams,
   OverlayService,
   DialogModalSizeEnum,
-  DataListNewRequest
+  NavPagesEvent,
+  PageNavOptionEvent
 } from '@neo/common';
 import { takeUntil } from 'rxjs/operators';
 import { EventListItem, EventListItemType } from '../../models/event-list-item.model';
 import { AddListComponent } from '../../components/add-list/add-list.component';
+import { ConfirmComponent } from '../../components/confirm/confirm.component';
 
 
+
+const MODAL_CFG = {
+  animated: true,
+  hasBackdrop: true,
+  size: DialogModalSizeEnum.Small
+};
 
 @Component({
   selector: 'app-main',
@@ -62,10 +70,19 @@ export class MainComponent implements OnInit, OnDestroy {
   onActionList(ev: EventListItem){
     switch (ev.type) {
       case EventListItemType.edit:
-      this._editItem(ev.id);
+        this._editItem(ev.id);
         break;
-    
+      case EventListItemType.remove:
+        this._remove(ev.id);
+        break;
+      case EventListItemType.reverte:
+        this._reverse(ev.id);
+        break;
+      case EventListItemType.delete:
+        this._delete(ev.id);
+        break;
       default:
+        console.log(ev);
         break;
     }
   }
@@ -80,17 +97,16 @@ export class MainComponent implements OnInit, OnDestroy {
   }
   addList() {
     const ref = this.modal.open(AddListComponent,
-      { animated: true, hasBackdrop: true, size: DialogModalSizeEnum.Small }
+      { ...MODAL_CFG, title: 'Add list'}
       );
     ref.onClose().subscribe(res => {
       if(res && res.data){ this.lists.addList(res.data); }
     });
   }
-  closeModal() {
-    // this.modal.dismiss();
-  }
-  onChange(val: string) {
-    // console.log(val);
+  onChange(ev: NavPagesEvent) {
+    if (ev.type !== PageNavOptionEvent.selector){
+      this.lists.getLists(ev.value);
+    }
   }
 
   viewItem(id) { console.log(id);  }
@@ -99,16 +115,64 @@ export class MainComponent implements OnInit, OnDestroy {
 
 
   private _editItem(id) {
-    const _editValue =  this.dto.data.filter(obj => obj.id === id)[0];
+    const _editValue =  this.getItem(id);
     const modalConfig = {
-      animated: true,
-      hasBackdrop: true,
-      size: DialogModalSizeEnum.Small,
+      ...MODAL_CFG,
+      title: 'Edit list',
       data: _editValue,
     };
     const ref = this.modal.open(AddListComponent, modalConfig);
     ref.onClose().subscribe(res => {
       if(res && res.data){ this.lists.updateItem(res.data); }
     });
+  }
+
+  private _remove(id){
+    const _editValue =  this.getItem(id);
+    const modalConfig = {
+      ...MODAL_CFG,
+      title: 'Move to bin',
+      confirmTitle: 'Are you sure to move?',
+      confirmSubTitle: ` The list: "${_editValue.name}"`
+    };
+    const ref = this.modal.open(ConfirmComponent, modalConfig);
+    ref.onClose().subscribe(res => {
+      if(res && res.type === 'close' && res.data === true){
+        this.lists.changeDeleteTo(id, 1); 
+      }
+    });
+  }
+  private _reverse(id){
+    const _editValue =  this.getItem(id);
+    const modalConfig = {
+      ...MODAL_CFG,
+      title: 'Enable the list',
+      confirmTitle: 'Are you sure to anable?',
+      confirmSubTitle: ` The list: "${_editValue.name}"`
+    };
+    const ref = this.modal.open(ConfirmComponent, modalConfig);
+    ref.onClose().subscribe(res => {
+      if(res && res.type === 'close' && res.data === true){
+        this.lists.changeDeleteTo(id, 0); 
+      }
+    });
+  }
+  private _delete(id){
+    const _editValue =  this.getItem(id);
+    const modalConfig = {
+      ...MODAL_CFG,
+      title: 'Delete element',
+      confirmTitle: 'Are you sure to delete?',
+      confirmSubTitle: ` The list: "${_editValue.name}"`
+    };
+    const ref = this.modal.open(ConfirmComponent, modalConfig);
+    ref.onClose().subscribe(res => {
+      if(res && res.type === 'close' && res.data === true){
+        this.lists.confirmDelete(id); 
+      }
+    });
+  }
+  private getItem(id: number){
+    return this.dto.data.filter(obj => obj.id === id)[0];
   }
 }
